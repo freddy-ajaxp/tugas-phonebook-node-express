@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 3 | DataTables</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <%- include("shared/navbar") -%>
+  <!-- /.navbar -->
+  
+
+  <!-- Main Sidebar Container -->
+  <%- include("shared/sidebar") -%>
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>DataTables</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Daftar Lengkap Contacs</h3>
+               
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Nama Lengkap</th>
+                    <th>No Telp.</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <% let i=1; %>
+                    <% response.contactList.forEach(function(item,index){ %>
+                        <tr>
+                        <td><%= item.fullname %></td>
+                        <td><%= item.email %></td>
+                        <td><%= item.phone_num %></td>                    
+                        <td>
+                            <!-- <a href="#modal-hapus-contact" data-toggle="modal" data-book-id="my_id_value">Open Modal</a> -->
+                            <form action="/contact/<%= item.id %>" method="GET">
+                                <button type="submit" class="btn btn-warning" style="float: left;">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </button>
+                            </form> 
+                     
+                              <button type="button" class="btn btn-danger" id="deleteBtn" data-toggle="modal" data-target="#modal-hapus-contact"
+                              data-id="<%= item.id %>"
+                              >
+                                <ion-icon name="trash-outline">
+                              </button>
+                        </td>
+                    </tr>
+                    <% i++ %>
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+ 
+
+  <div class="modal fade" id="modal-hapus-contact">
+    <div class="modal-dialog">
+      <div class="modal-content bg-default">
+        <div class="modal-header">
+          <h4 class="modal-title">Konfirmasi</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <div class="modal-body">
+            <form action="/delete" method="post">
+          <p>Data yang dihapus tidak dapat dikembalikan. lanjutkan?<br></p>
+        
+            <input type="hidden" name="id" id="idkl" value="">
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-danger">Hapus</button>
+            </div>
+        </form>
+    </div>
+
+
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.0.5
+    </div>
+    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+    reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- Ion Icon-->
+<script src="https://unpkg.com/ionicons@5.2.1/dist/ionicons.js"></script>
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+<script>
+ $(document).on("click", "#deleteBtn", function () {
+    var ids = $(this).data('id');
+     $(".modal-body #idkl").val( ids );
+    });
+  </script>
+
+</body>
+</html>
