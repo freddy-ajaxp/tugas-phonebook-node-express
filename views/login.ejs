@@ -26,10 +26,10 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Demo Login (admin@admin.com/admin)</p>
+      <p class="login-box-msg">Demo Login</p>
        <form action="/login" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" name="email" placeholder="admin@admin.com" value="admin@admin.com">
+          <input type="email" class="form-control" name="email" placeholder="admin@admin.com">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Admin" value="admin">
+          <input type="password" class="form-control" name="password" placeholder="Admin">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -45,9 +45,16 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          <div class="col-9">
+            <button type="submit" class="btn btn-primary ">Sign In</button>
           </div>
+          <div class="col-3">
+            <p class="mb-0">
+              <a href="/register" class="text-center">Register</a>
+            </p>
+          </div>
+          <!-- /.col -->
+          
           <!-- /.col -->
         </div>
       </form>      

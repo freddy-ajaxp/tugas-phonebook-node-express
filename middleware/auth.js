@@ -1,7 +1,7 @@
 // const jwt = require("jsonwebtoken");
 
 exports.auth = (req, res, next) => {
-  if (req.session && req.session.user === "admin" && req.session.admin)
+  if (req.session.user)
     return next();
   else return res.render("login.ejs");
 };

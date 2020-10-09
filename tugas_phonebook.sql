@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2020 at 03:53 AM
+-- Generation Time: Oct 08, 2020 at 04:10 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.2
 
@@ -41,6 +41,7 @@ CREATE TABLE `biodata` (
 
 INSERT INTO `biodata` (`id`, `fullname`, `phone_num`, `email`, `createdAt`, `updatedAt`) VALUES
 (1, 'orang_1', '0810001', 'seseorang_1@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'orang_2', '0810002', 'seseorang_2@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (3, 'orang_3', '0810003', 'seseorang_3@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (4, 'orang_4', '0810004', 'seseorang_4@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (5, 'orang_5', '0810005', 'seseorang_5@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
@@ -51,62 +52,7 @@ INSERT INTO `biodata` (`id`, `fullname`, `phone_num`, `email`, `createdAt`, `upd
 (10, 'orang_10', '0810010', 'seseorang_10@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (11, 'orang_11', '0810011', 'seseorang_11@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (12, 'orang_12', '0810012', 'seseorang_12@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(13, 'orang_13', '0810013', 'seseorang_13@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(14, 'manusia_1', '0810001', 'email_manusia1_@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(15, 'manusia_2', '0810002', 'email_manusia_2@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(16, 'manusia_3', '0810003', 'email_manusia_3@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(17, 'manusia_4', '0810004', 'email_manusia_4@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(18, 'manusia_5', '0810005', 'email_manusia_5@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(19, 'manusia_6', '0810006', 'email_manusia_6@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(20, 'manusia_7', '0810007', 'email_manusia_7@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(21, 'manusia_8', '0810008', 'email_manusia_8@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(22, 'manusia_9', '0810009', 'email_manusia_9@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(23, 'manusia_10', '0810010', 'email_manusia_10@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(24, 'manusia_11', '0810011', 'email_manusia_11@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(25, 'seseorang', '123123', 'mail@gmail.com', '2020-10-07 02:00:04', '2020-10-07 02:00:04'),
-(26, 'nomor 26', '12321', 'example@gmail.com', '2020-10-07 10:27:28', '2020-10-07 10:27:28'),
-(27, 'baruuu', '123123', 'example@gmail.com', '2020-10-07 10:28:40', '2020-10-07 10:28:40'),
-(28, 'baruuu', '123123', 'example@gmail.com', '2020-10-07 10:29:05', '2020-10-07 10:29:05'),
-(29, 'baruuu', '123123', 'example@gmail.com', '2020-10-07 10:30:22', '2020-10-07 10:30:22'),
-(30, 'asnd yuhu berhasi di edit', 'ansdoa', 'example@gmail.com', '2020-10-07 10:31:01', '2020-10-08 01:42:06'),
-(31, 'asnd baru lagi niiii', 'adslanslkdasd', 'example@gmail.com', '2020-10-07 10:31:17', '2020-10-08 01:43:39'),
-(32, 'asnd', 'ansdoa', 'example@gmail.com', '2020-10-07 10:32:56', '2020-10-07 10:32:56'),
-(43, 'nama lengkap', 'pasti ebrhasil', 'example@gmail.com', '2020-10-07 10:41:00', '2020-10-07 10:41:00'),
-(44, 'nama lengkap', 'pasti ebrhasil', 'example@gmail.com', '2020-10-07 10:41:43', '2020-10-07 10:41:43'),
-(46, 'udin penyok', '0912309128390', 'udinpenyok@gmail.com', '2020-10-07 13:30:42', '2020-10-07 13:30:42'),
-(47, 'manusia_1', '0810001', 'email_manusia1_@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(48, 'manusia_2', '0810002', 'email_manusia_2@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(49, 'manusia_3', '0810003', 'email_manusia_3@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(50, 'manusia_4', '0810004', 'email_manusia_4@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(51, 'manusia_5', '0810005', 'email_manusia_5@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(52, 'manusia_6', '0810006', 'email_manusia_6@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(53, 'manusia_7', '0810007', 'email_manusia_7@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(54, 'manusia_8', '0810008', 'email_manusia_8@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(55, 'manusia_9', '0810009', 'email_manusia_9@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(56, 'manusia_10', '0810010', 'email_manusia_10@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(57, 'manusia_11', '0810011', 'email_manusia_11@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(58, 'manusia_1', '0810001', 'email_manusia1_@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(59, 'manusia_2', '0810002', 'email_manusia_2@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(60, 'manusia_3', '0810003', 'email_manusia_3@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(61, 'manusia_4', '0810004', 'email_manusia_4@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(62, 'manusia_5', '0810005', 'email_manusia_5@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(63, 'manusia_6', '0810006', 'email_manusia_6@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(64, 'manusia_7', '0810007', 'email_manusia_7@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(65, 'manusia_8', '0810008', 'email_manusia_8@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(66, 'manusia_9', '0810009', 'email_manusia_9@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(67, 'manusia_10', '0810010', 'email_manusia_10@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(68, 'manusia_11', '0810011', 'email_manusia_11@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(69, 'manusia_1', '0810001', 'email_manusia1_@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(70, 'manusia_2', '0810002', 'email_manusia_2@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(71, 'manusia_3', '0810003', 'email_manusia_3@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(72, 'manusia_4', '0810004', 'email_manusia_4@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(73, 'manusia_5', '0810005', 'email_manusia_5@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(74, 'manusia_6', '0810006', 'email_manusia_6@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(75, 'manusia_7', '0810007', 'email_manusia_7@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(76, 'manusia_8', '0810008', 'email_manusia_8@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(77, 'manusia_9', '0810009', 'email_manusia_9@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(78, 'manusia_10', '0810010', 'email_manusia_10@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(79, 'manusia_11', '0810011', 'email_manusia_11@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(13, 'orang_13', '0810013', 'seseorang_13@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -180,7 +126,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `biodata`
 --
 ALTER TABLE `biodata`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `users`
 --
