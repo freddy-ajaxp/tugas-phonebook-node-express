@@ -1,171 +1,257 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Validation Form</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>AdminLTE 3 | Validation Form</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-</head>
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
-  <!-- Navbar -->
-  <%- include("shared/navbar") -%>
-  <!-- /.navbar -->
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="../../plugins/fontawesome-free/css/all.min.css"
+    />
+    <!-- Ionicons -->
+    <link
+      rel="stylesheet"
+      href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css" />
+    <!-- Google Font: Source Sans Pro -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <%- include("shared/navbar") -%>
+      <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
-  <%- include("shared/sidebar") -%>
+      <!-- Main Sidebar Container -->
+      <%- include("shared/sidebar") -%>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Add New Contact</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Validation</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- jquery validation -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Enter New Data</h3>
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>Add New Contact</h1>
               </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form role="form" id="quickForm" action="/contact" method="POST" >
-                <div class="card-body">
-                  <div class="form-group">
-                    <label for="fullnameInput">Fullname</label>
-                    <input type="text" name="fullname" class="form-control" id="fullnameInput" placeholder="Enter Fullname">
-                  </div>
-                  <div class="form-group">
-                    <label for="phoneNumberInput">Phone Number</label>
-                    <input type="text" name="phone_num" class="form-control" id="phoneNumberInput" placeholder="Enter Phone Number">
-                  </div>
-                  <div class="form-group">
-                    <label for="emailInput">Email</label>
-                    <input type="email" name="email" class="form-control" id="emailInput" placeholder="Enter Email">
-                  </div>
-
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </form>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">Validation</li>
+                </ol>
+              </div>
             </div>
-            <!-- /.card -->
-            </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-6">
-
           </div>
-          <!--/.col (right) -->
-        </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.5
+          <!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <!-- left column -->
+              <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Enter New Data</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                  <form
+                    role="form"
+                    id="contactForm"
+                    name="addContactForm"
+                    action="/contact"
+                    method="POST"
+                  >
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label for="fullnameInput">Fullname</label>
+                        <input
+                          type="text"
+                          name="fullname"
+                          class="form-control"
+                          id="fullname"
+                          placeholder="Enter Fullname"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="phoneNumberInput">Phone Number</label>
+                        <input
+                          type="text"
+                          name="phone_num"
+                          class="form-control"
+                          id="phone_num"
+                          placeholder="Enter Phone Number"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="emailInput">Email</label>
+                        <input
+                          type="email"
+                          name="email"
+                          class="form-control"
+                          id="email"
+                          placeholder="Enter Email"
+                        />
+                      </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="submitBtn"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <!-- /.card -->
+              </div>
+              <!--/.col (left) -->
+              <!-- right column -->
+              <div class="col-md-6"></div>
+              <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+      <footer class="main-footer">
+        <div class="float-right d-none d-sm-block"><b>Version</b> 3.0.5</div>
+        <strong
+          >Copyright &copy; 2014-2019
+          <a href="http://adminlte.io">AdminLTE.io</a>.</strong
+        >
+        All rights reserved.
+      </footer>
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+      </aside>
+      <!-- /.control-sidebar -->
     </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
-  </footer>
+    <!-- ./wrapper -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery Validate -->
+    <script src="../..//plugins/jquery-validation/jquery.validate.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- jquery-validation -->
+    <script src="../../plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="../../plugins/jquery-validation/additional-methods.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $.validator.setDefaults({
+        submitHandler: function () {
+          alert("Form successful submitted!");
+        },
+      });
+        $().ready(function () {
+          $("#contactForm").validate({
+            rules: {
+              fullname: {
+                required: true,
+                minlength: 5,
+              },
+              phone_num: {
+                required: true,
+                minlength: 8,
+                digits: true
+              },
+              email: {
+                required: true,
+                email: true,
+              },
+            },
+            messages: {
+              fullname: {
+                required: "nama lengkap harus diisi",
+                minlength: "Minimal 5 karakter",
+              },
+              phone_num: {
+                required: "Nomor telpon harus diisi",
+                minlength: "minimal 8 karakter",
+                digits: "hanya dapat memasukkan angka"
+              },
+              email: {
+                required: "email  harus diisi",
+                email: "masukkan email yang benar",
+              },
+            },
+            errorElement: "span",
+            errorPlacement: function (error, element) {
+              error.addClass("invalid-feedback");
+              element.closest(".form-group").append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+              $(element).addClass("is-invalid");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+              $(element).removeClass("is-invalid");
+            },
+          });
+        });
+      });
 
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- jquery-validation -->
-<script src="../../plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="../../plugins/jquery-validation/additional-methods.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<script type="text/javascript">
-$(document).ready(function () {
-  $.validator.setDefaults({
-    submitHandler: function () {
-      alert( "Form successful submitted!" );
-    }
-  });
-  $('#quickForm').validate({
-    rules: {
-      email: {
-        required: true,
-        email: true,
-      },
-      password: {
-        required: true,
-        minlength: 5
-      },
-      terms: {
-        required: true
-      },
-    },
-    messages: {
-      email: {
-        required: "Please enter a email address",
-        email: "Please enter a vaild email address"
-      },
-      password: {
-        required: "Please provide a password",
-        minlength: "Your password must be at least 5 characters long"
-      },
-      terms: "Please accept our terms"
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.form-group').append(error);
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass('is-invalid');
-    }
-  });
-});
-</script>
-</body>
+      $("#submitBtn").click(function (e) {
+        e.preventDefault();
+        var IsValid = $("#contactForm").valid();
+        console.log("isValid", IsValid);
+        if (IsValid) {
+          var fullname = $("#fullname").val();
+          var phone_num = $("#phone_num").val();
+          var email = $("#email").val();
+
+          console.log("semua nilai", fullname, phone_num, email)
+          if (fullname && email && phone_num) {
+            $.ajax({
+              type: "post",
+              url: "/contact",
+              data: { fullname, email, phone_num },
+              success: function (response) {
+                $(document).Toasts("create", {
+                  class: "bg-success",
+                  title: "Success",
+                  body: "Berhasil Menambah Data "+fullname,
+                });
+              },
+              error: function (response) {
+                console.log("response", response);
+                $(document).Toasts("create", {
+                  class: "bg-danger",
+                  title: "Gagal",
+                  body: response.responseJSON.error.message,
+                });
+              },
+            });
+          } else {
+            alert("mohon lengkapi data");
+          }
+        }
+      });
+    </script>
+  </body>
 </html>

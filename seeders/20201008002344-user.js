@@ -15,7 +15,9 @@ module.exports = {
     username: 'admin',
     email: "admin@admin.com",
     password: "$2b$10$kz6/S2nCkWHscz/N9DdMXu5wl0o/t4VUMnhE2GIhGvvX/te2GYM7q",
-    admin: true
+    admin: true,
+    createdAt: "2020-10-09 01:40:20",
+    updatedAt: "2020-10-09 01:40:20"
      }], {});
   },
 

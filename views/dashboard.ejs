@@ -50,11 +50,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-
-
                             <!-- /.card -->
-
-
                             <!-- /.card -->
                             <div class="card">
                                 <div class="card-header">
@@ -141,7 +137,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form action="/delete" method="post">
+                        <form action="/delete" method="post" id="deleteForm">
                             <p>Data yang dihapus tidak dapat dikembalikan. lanjutkan?<br></p>
 
                             <input type="hidden" name="id" id="idDelete" value="">
@@ -170,7 +166,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form action="/editContact" method="post">
+                        <form id = "editForm">
                             <div class="form-group">
                                 <label class="col-form-label">Nama Lengkap:</label>
                                 <input type="text" class="form-control" name="fullname" id="nama">
@@ -217,6 +213,9 @@
     <script src="https://unpkg.com/ionicons@5.2.1/dist/ionicons.js"></script>
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- jquery-validation -->
+    <script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="plugins/jquery-validation/additional-methods.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables -->
@@ -273,38 +272,39 @@
             $.ajax({
                 type: 'post',
                 url: "/delete",
-                data: {id},
+                data: { id },
                 success: function (response) {
                     $(document).Toasts('create', {
                         class: 'bg-success',
                         title: 'Berhasil',
                         body: 'Data Berhasil Dihapus'
                     })
-                    setTimeout(function(){ location.reload(); }, 1000);
+                    setTimeout(function () { location.reload(); }, 1000);
                 },
                 error: function (response) {
                     console.log(response);
                     $(document).Toasts('create', {
                         class: 'bg-danger',
                         title: 'Gagal',
-                        body: 'Terdapat Kesalahan'
+                        body: response.responseJSON.message,
                     })
                 }
             })
         })
-        
+
         $("#edit-confirmation").click(function (e) {
             e.preventDefault();
+            var IsValid=$("#editForm").valid();
+            if(IsValid){
             var fullname = $("#nama").val();
             var email = $("#email").val();
             var phone_num = $("#phone").val();
             var id = $("#idEdit").val();
             // console.log(nama,email,phone,idEdit)
-
             $.ajax({
                 type: 'post',
-                url: "/editContact",
-                data: { fullname, email, phone_num, id},
+                url: "/editContact", 
+                data: { fullname, email, phone_num, id },
                 // async: true,    // No need to use this
                 success: function (response) {
                     $(document).Toasts('create', {
@@ -312,7 +312,7 @@
                         title: 'Berhasil',
                         body: 'Data Berhasil Diubah'
                     })
-                    setTimeout(function(){ location.reload(); }, 1000);
+                    setTimeout(function () { location.reload(); }, 1000);
                 },
                 error: function (response) {
                     console.log(response);
@@ -323,11 +323,62 @@
                     })
                 }
             });
-
-
+            }
         })
-    </script>
 
+        $(document).ready(function () {
+            $.validator.setDefaults({
+                submitHandler: function () {
+                    alert("Form successful submitted!");
+                }
+            });
+
+            $().ready(function () {
+                $('#editForm').validate({
+                    rules: {
+                        fullname: {
+                            required: true,
+                            minlength: 5
+                        },
+                        phone_num: {
+                            required: true,
+                            minlength: 8
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                    },
+                    messages: {
+                        fullname: {
+                            required: "Fullname harus diisi",
+                            minlength: "Minimal 5 karakter"
+                        },
+                        phone_num: {
+                            required: "Nomor telpon harus diisi",
+                            minlength: "minimal 8 karakter"
+                        },
+                        email: {
+                            required: "email harus diisi",
+                            email: "masukkan email yang benar"
+                        },
+                    },
+                    errorElement: 'span',
+                    errorPlacement: function (error, element) {
+                        error.addClass('invalid-feedback');
+                        element.closest('.form-group').append(error);
+                    },
+                    highlight: function (element, errorClass, validClass) {
+                        $(element).addClass('is-invalid');
+                    },
+                    unhighlight: function (element, errorClass, validClass) {
+                        $(element).removeClass('is-invalid');
+                    }
+                });
+            })
+        
+        });
+    </script>
 </body>
 
 </html>

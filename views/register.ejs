@@ -37,7 +37,7 @@
       <div class="card">
         <div class="card-body login-card-body">
           <p class="login-box-msg">Masukkan Data</p>
-          <form action="/login" method="post">
+          <form action="/login" method="post" id="registerForm">
             <div class="input-group mb-3">
               <input
                 type="text"
@@ -108,44 +108,99 @@
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- jquery-validation -->
+    <script src="../../plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="../../plugins/jquery-validation/additional-methods.min.js"></script>
 
     <script>
+      $.validator.setDefaults({
+        submitHandler: function () {
+          alert("Form successful submitted!");
+        },
+      });
+      $().ready(function () {
+        $("#registerForm").validate({
+          rules: {
+            username: {
+              required: true,
+              minlength: 5,
+            },
+            password: {
+              required: true,
+              minlength: 8,
+            },
+            email: {
+              required: true,
+              email: true,
+            },
+          },
+          messages: {
+            username: {
+              required: "Username harus diisi",
+              minlength: "Minimal 5 karakter",
+            },
+            password: {
+              required: "Nomor telpon harus diisi",
+              minlength: "minimal 8 karakter",
+            },
+            email: {
+              required: "email harus diisi",
+              email: "masukkan email yang benar",
+            },
+          },
+          errorElement: "span",
+          errorPlacement: function (error, element) {
+            error.addClass("invalid-feedback");
+            element.closest(".input-group").append(error);
+          },
+          highlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-invalid");
+          },
+          unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass("is-invalid");
+          },
+        });
+      });
+
       $("#registerBtn").click(function (e) {
         e.preventDefault();
-        var username = $("#username").val();
-        var email = $("#email").val();
-        var password = $("#password").val();
-        if (username && email && password) 
-        {
-          console.log(username, email, password);
-          $.ajax({
-                type: 'post',
-                url: "/register",
-                data: { username, email, password},
-                // async: true,    // No need to use this
-                success: function (response) {
-                    $(document).Toasts('create', {
-                        class: 'bg-success',
-                        title: 'Register Berhasil',
-                        body: 'Mengarahkan Ke Halaman Login'
-                    })
-                    setTimeout(function(){ window.location.href= "/login";; }, 1000);
-                },
-                error: function (response) {
-                    console.log('response',response);
-                    $(document).Toasts('create', {
-                        class: 'bg-danger',
-                        title: 'Gagal',
-                        body: response.responseJSON.error.message
-                    })
-                }
-            });
-        }
-        else {
-          alert("mohon lengkapi data");
-        }
+        var IsValid = $("#registerForm").valid();
+        if (IsValid) {
+          console.log("masuk ke valid");
+          var username = $("#username").val();
+          var email = $("#email").val();
+          var password = $("#password").val();
 
-        
+          if (username && email && password) {
+            console.log(username, email, password);
+            $.ajax({
+              type: "post",
+              url: "/register",
+              data: { username, email, password },
+              // async: true,    // No need to use this
+              success: function (response) {
+                $(document).Toasts("create", {
+                  class: "bg-success",
+                  title: "Register Berhasil",
+                  body: "Mengarahkan Ke Halaman Login",
+                });
+                setTimeout(function () {
+                  window.location.href = "/login";
+                }, 1000);
+              },
+              error: function (response) {
+                console.log("response", response);
+                $(document).Toasts("create", {
+                  class: "bg-danger",
+                  title: "Gagal",
+                  body: response.responseJSON.error.message,
+                });
+              },
+            });
+          } else {
+            alert("mohon lengkapi data");
+          }
+        }
       });
     </script>
   </body>

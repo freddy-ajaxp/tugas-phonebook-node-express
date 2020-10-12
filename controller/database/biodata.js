@@ -132,14 +132,21 @@ exports.getContact = async (req, res) => {
 exports.editContact = async (req, res) => {
   try {
     console.log('req.body',req.body)
-    const result = await Biodata.update(req.body, {
-      where: {
-        id: req.body.id,
-      },
-    });
-    console.log('status update',result)
-    // res.redirect("/");
-    res.status(200).send({message:"berhasil ubah data"})
+    const {fullname, email, phone_num} = req.body;
+    if(fullname, email, phone_num){
+      const result = await Biodata.update(req.body, {
+        where: {
+          id: req.body.id,
+        },
+      });
+      console.log('status update',result)
+      // res.redirect("/");
+      res.status(200).send({message:"berhasil ubah data"})
+    }
+    else{
+      res.status(400).send({message:"data yang dikirim tidak lengkap"})
+    }
+    
   } catch (err) {
     console.log(err);
     return res.status(500).send({
@@ -186,6 +193,7 @@ exports.deleteContact = async (req, res) => {
 };
 
 exports.postContact = async (req, res) => {
+  console.log('isi req',req.body)
   try {
     const queryResponse = await Biodata.create({
       ...req.body,

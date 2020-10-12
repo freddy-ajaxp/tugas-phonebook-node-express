@@ -6,7 +6,6 @@ session = require("express-session");
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
     //!loggedin && form submit benar
     if (email && password) {
       const userFound = await User.findOne({
@@ -15,21 +14,21 @@ exports.login = async (req, res) => {
           email: email,
         },
       });
-
       // !emailExist && redirect | masih belum disertai pesan error
-
       if (!userFound) {
         res.redirect("/");
+      } else {
+        const validPass = await bcrypt.compare(password, userFound.password);
+        if (!validPass) {
+          // res.redirect("/");
+          res.status(401).send({message:"invalid password or email"})
+        } else {
+          req.session.user = userFound.username;
+          req.session.admin = userFound.admin;
+          res.redirect("/");
+          // res.status(401).send({message:"invalid password or email"})
+        }
       }
-
-      const validPass = await bcrypt.compare(password, userFound.password);
-
-      if (!validPass) {
-        res.redirect("/login");
-      }
-      req.session.user = userFound.username;
-      req.session.admin = userFound.admin;
-      res.redirect("/");
     }
     //redirect to login page
     else {
@@ -45,9 +44,9 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.register = async(req,res) => {
+exports.register = async (req, res) => {
   try {
-    const { username, email, password} = req.body;
+    const { username, email, password } = req.body;
     const emailExist = await User.findOne({
       where: {
         email,
@@ -65,7 +64,7 @@ exports.register = async(req,res) => {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     const createResponse = await User.create({
-      username:username,
+      username: username,
       email: email,
       password: hashedPassword,
     });
