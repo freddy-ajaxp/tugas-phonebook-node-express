@@ -14,39 +14,37 @@ const getPagingData = (data, page, limit) => {
   const { count: totalItems, rows: datas } = data;
   // const currentPage = page > 0 ? +page : 0;
   const totalPages = Math.ceil(totalItems / limit);
-
+  console.log("apakah totalItems integer?", Number.isInteger(totalItems));
+  console.log("apakah totalPages integer?", Number.isInteger(totalPages));
   return {
     recordsTotal: totalItems,
+    recordsFiltered: totalItems,
     data: datas,
-    totalPages,
-    // draw: currentPage, //draw dicomment karena utk tes pengaruhnya dari frontend
+    totalPages: totalPages,
   };
 };
 
-
 exports.getDataTable = async (req, res) => {
   try {
-    console.log('isi query', req.query)
-    
     const { page, start, length, search } = req.body; //bisa dari query atau body
-    const title =  search.value
+    const title = search.value;
     var condition = title ? { fullname: { [Op.like]: `%${title}%` } } : null;
     const { limit, offset } = getPagination(page, length);
 
-    console.log('length, start', length, start)
+    console.log("length, start", length, start);
     const contactList = await Biodata.findAndCountAll({
       raw: true,
       where: condition,
-      limit: parseInt(length) ,
+      limit: parseInt(length),
       offset: parseInt(start),
       attributes: ["id", "fullname", "phone_num", "email"],
     });
     // console.log('contactList',contactList);
     let response = getPagingData(contactList, page, limit);
-    console.log('response', response)
+    // console.log('response', response)
 
     //ubah format data ke array (DIHAPUS SEMENTARA)
-    
+
     res.send(response);
   } catch (err) {
     console.log(err);
@@ -98,7 +96,6 @@ exports.getContactPagination = async (req, res) => {
     });
   }
 };
-
 
 const countNavPage = (draw, totalPage) => {
   return [draw];
