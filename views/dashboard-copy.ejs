@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>AdminLTE 3 | DataTables</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
+    <!-- Ionicons -->
+    <link
+      rel="stylesheet"
+      href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <!-- Bootstrap DataTables -->
+    <link href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" />
+    <link
+      rel="stylesheet"
+      href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css"
+    />
+    <!-- DataTables from dataTables.net-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"
+    />
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/adminlte.min.css" />
+    <!-- Google Font: Source Sans Pro -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <%- include("shared/navbar") -%>
+      <!-- /.navbar -->
+
+      <!-- Main Sidebar Container -->
+      <%- include("shared/sidebar") -%>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>DataTables</h1>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Daftar Lengkap Contacs</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table
+                      id="contactTable"
+                      class="display"
+                      style="width: 100%"
+                    >
+                      <thead>
+                        <tr>
+                          <th>Nama Lengkap</th>
+                          <th>Email</th>
+                          <th>No Hp</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                          <th>Nama Lengkap</th>
+                          <th>Email</th>
+                          <th>No Hp</th>
+                          <th>Action</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+
+      <div class="modal fade" id="modal-hapus-contact">
+        <div class="modal-dialog">
+          <div class="modal-content bg-default">
+            <div class="modal-header">
+              <h4 class="modal-title">Konfirmasi</h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <form action="/delete" method="post" id="deleteForm">
+                <p>
+                  Data yang dihapus tidak dapat dikembalikan. lanjutkan??<br />
+                </p>
+
+                <input type="hidden" name="id" id="idDelete" value="" />
+                <div class="modal-footer justify-content-between">
+                  <button
+                    type="button"
+                    class="btn btn-outline-dark"
+                    data-dismiss="modal"
+                  >
+                    Batal
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-danger"
+                    id="delete-confirmation"
+                  >
+                    Hapus
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+      <div class="modal fade" id="modal-edit-contact">
+        <div class="modal-dialog">
+          <div class="modal-content bg-default">
+            <div class="modal-header">
+              <h4 class="modal-title">Ubah Data</h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <form id="editForm">
+                <div class="form-group">
+                  <label class="col-form-label">Nama Lengkap:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="fullname"
+                    id="nama"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label">Email:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="email"
+                    id="email"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label">No Telp:</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    name="phone_num"
+                    id="phone"
+                  />
+                </div>
+                <input type="hidden" name="id" id="idEdit" value="" />
+                <div class="modal-footer justify-content-between">
+                  <button
+                    type="button"
+                    class="btn btn-outline-dark"
+                    data-dismiss="modal"
+                  >
+                    Batal
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning"
+                    id="edit-confirmation"
+                  >
+                    Ubah
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+      <!-- /.content-wrapper -->
+      <footer class="main-footer">
+        <div class="float-right d-none d-sm-block"><b>Version</b> 3.0.5</div>
+        <strong
+          >Copyright &copy; 2014-2019
+          <a href="http://adminlte.io">AdminLTE.io</a>.</strong
+        >
+        All rights reserved.
+      </footer>
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+      </aside>
+      <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- Ion Icon-->
+    <script src="https://unpkg.com/ionicons@5.2.1/dist/ionicons.js"></script>
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- jquery-validation -->
+    <script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="plugins/jquery-validation/additional-methods.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables-conditionalPaging/datatables-conditionalPaging.js"></script>
+    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- page script -->
+    <script>
+      $(document).ready(function () {
+        var table = $("#contactTable").DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: {
+            url: "/contacts",
+            type: "POST",
+          },
+          searchDelay: 550,
+          info: false,
+          oLanguage: {
+            sSearch: "Search By Nama Lengkap: ",
+          },
+          conditionalPaging: {
+            style: "fade",
+            speed: 500,
+          },
+          columnDefs: [
+            {
+              targets: 0,
+              data: "fullname",
+            },
+            {
+              targets: 1,
+              data: "email",
+            },
+            {
+              targets: 2,
+              data: "phone_num",
+            },
+            {
+              targets: 3,
+              data: null,
+            },
+            {
+              targets: -1,
+              data: "id",
+              defaultContent: `<button type='button' class='btn btn-warning' id='editBtn'
+                                                         data-toggle='modal' data-target='#modal-edit-contact'>
+                                                         <ion-icon name='create-outline'></ion-icon>
+                                                     </button>
+
+                                                     <button type="button" class="btn btn-danger" id="deleteBtn"
+                                                         data-toggle="modal" data-target="#modal-hapus-contact">
+                                                         <ion-icon name="trash-outline">
+                                                     </button>
+                                                     `,
+            },
+          ],
+        });
+
+        $("#contactTable tbody").on("click", "button", function () {
+          var idButton = this.id;
+          // console.log("id row dipilih", idButton);
+          var data = table.row($(this).parents("tr")).data();
+          // console.log(data)
+          if (idButton === "deleteBtn") {
+            var ids = $(this).data("id");
+            $("#idDelete").val(data.id);
+          } else {
+            $("#nama").val(data.fullname);
+            $("#email").val(data.email);
+            $("#phone").val(data.phone_num);
+            $("#idEdit").val(data.id);
+          }
+
+          // alert(data["id"] + "'s salary is: " + data["fullname"]);
+        });
+      });
+
+      $("#delete-confirmationn").click(function (e) {
+        e.preventDefault();
+        var id = $("#idDelete").val();
+        $.ajax({
+          type: "post",
+          url: "/delete",
+          data: { id },
+          success: function (response) {
+            $(document).Toasts("create", {
+              class: "bg-success",
+              title: "Berhasil",
+              body: "Data Berhasil Dihapus",
+            });
+            setTimeout(function () {
+              location.reload();
+            }, 1000);
+          },
+          error: function (response) {
+            console.log(response);
+            $(document).Toasts("create", {
+              class: "bg-danger",
+              title: "Gagal",
+              body: response.responseJSON.message,
+            });
+          },
+        });
+      });
+
+      $("#edit-confirmation").click(function (e) {
+        e.preventDefault();
+        var IsValid = $("#editForm").valid();
+        if (IsValid) {
+          var fullname = $("#nama").val();
+          var email = $("#email").val();
+          var phone_num = $("#phone").val();
+          var id = $("#idEdit").val();
+          // console.log(nama,email,phone,idEdit)
+          $.ajax({
+            type: "post",
+            url: "/editContact",
+            data: { fullname, email, phone_num, id },
+            // async: true,    // No need to use this
+            success: function (response) {
+              $(document).Toasts("create", {
+                class: "bg-success",
+                title: "Berhasil",
+                body: "Data Berhasil Diubah",
+              });
+              setTimeout(function () {
+                location.reload();
+              }, 1000);
+            },
+            error: function (response) {
+              console.log(response);
+              $(document).Toasts("create", {
+                class: "bg-danger",
+                title: "Gagal",
+                body: "Terdapat Kesalahan",
+              });
+            },
+          });
+        }
+      });
+
+      $(document).ready(function () {
+        $.validator.setDefaults({
+          submitHandler: function () {
+            alert("Form successful submitted!");
+          },
+        });
+
+        $().ready(function () {
+          $("#editForm").validate({
+            rules: {
+              fullname: {
+                required: true,
+                minlength: 5,
+              },
+              phone_num: {
+                required: true,
+                minlength: 8,
+              },
+              email: {
+                required: true,
+                email: true,
+              },
+            },
+            messages: {
+              fullname: {
+                required: "Fullname harus diisi",
+                minlength: "Minimal 5 karakter",
+              },
+              phone_num: {
+                required: "Nomor telpon harus diisi",
+                minlength: "minimal 8 karakter",
+              },
+              email: {
+                required: "email harus diisi",
+                email: "masukkan email yang benar",
+              },
+            },
+            errorElement: "span",
+            errorPlacement: function (error, element) {
+              error.addClass("invalid-feedback");
+              element.closest(".form-group").append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+              $(element).addClass("is-invalid");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+              $(element).removeClass("is-invalid");
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

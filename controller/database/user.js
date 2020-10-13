@@ -16,7 +16,7 @@ exports.login = async (req, res) => {
       });
       // !emailExist && redirect | masih belum disertai pesan error
       if (!userFound) {
-        res.redirect("/");
+        res.status(401).send({message:"invalid password or email"})
       } else {
         const validPass = await bcrypt.compare(password, userFound.password);
         if (!validPass) {

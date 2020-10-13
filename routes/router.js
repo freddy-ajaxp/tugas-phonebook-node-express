@@ -3,7 +3,7 @@ var router = express.Router();
 
 
 //DB controller
-const { findAll, getContact, getContactPagination, editContact, postContact, deleteContact} = require("../controller/database/biodata");
+const { findAll, getContact, getContactPagination, getDataTable, editContact, postContact, deleteContact} = require("../controller/database/biodata");
 const { login, logout, register} = require("../controller/database/user");
 
 //middleware
@@ -12,7 +12,8 @@ const {validation} = require('../middleware/validation');
 const schemas = require('../middleware/schema'); 
 //routes untuk pengolahan data
 router.get("/", auth, findAll);
-router.post("/contacts", getContactPagination);
+// router.post("/contacts", getContactPagination);// untuk table manual
+router.post("/contacts", getDataTable); //untuk table datatable
 router.get("/contact/:id", auth, getContact);
 router.post("/contact", auth, validation(schemas.addContact), postContact);
 router.post("/editContact", auth, validation(schemas.editContact), editContact);

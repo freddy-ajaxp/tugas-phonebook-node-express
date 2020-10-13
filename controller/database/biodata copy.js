@@ -1,52 +1,91 @@
 const { Biodata } = require("../../models");
-const { Sequelize, Op } = require("sequelize");
+const { Sequelize } = require("sequelize");
 session = require("express-session");
 datatablesQuery = require("datatables-query");
 
-const getPagination = (page, length) => {
-  const limit = length ? +length : 0;
+const getPagination = (page, size = 5) => {
+  const limit = size ? +size : 0;
   const offset = page ? page * limit : 0;
 
   return { limit, offset };
 };
 
 const getPagingData = (data, page, limit) => {
-  const { count: totalItems, rows: datas } = data;
-  // const currentPage = page > 0 ? +page : 0;
+  const { count: totalItems, rows: tutorials } = data;
+  const currentPage = page > 0 ? +page : 0;
   const totalPages = Math.ceil(totalItems / limit);
 
   return {
     recordsTotal: totalItems,
-    data: datas,
+    data: tutorials,
     totalPages,
-    // draw: currentPage, //draw dicomment karena utk tes pengaruhnya dari frontend
+    draw: currentPage,
   };
 };
-
+const countNavPage = (draw, totalPage) => {
+  //  if (draw===1 & totalPage>=3) return [1,2,null]
+  //  else if (draw===totalPage && totalPage===1) return [1]
+  //  else if (draw===totalPage & totalPage>=3) return [draw-2,draw-1,draw]
+  //  else if ((totalPage-draw)>=3) return [draw-1, draw, draw+1]
+  return [draw];
+};
 
 exports.getDataTable = async (req, res) => {
   try {
-    console.log('isi query', req.query)
-    
-    const { page, start, length, search } = req.body; //bisa dari query atau body
-    const title =  search.value
-    var condition = title ? { fullname: { [Op.like]: `%${title}%` } } : null;
-    const { limit, offset } = getPagination(page, length);
+    const { page, size, title } = req.query;
+    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
-    console.log('length, start', length, start)
+    const { limit, offset } = getPagination(page, size);
+
     const contactList = await Biodata.findAndCountAll({
       raw: true,
       where: condition,
-      limit: parseInt(length) ,
-      offset: parseInt(start),
-      attributes: ["id", "fullname", "phone_num", "email"],
+      limit,
+      offset,
+      attributes: { exclude: ["createdAt", "updatedAt", "id"] },
     });
-    // console.log('contactList',contactList);
-    let response = getPagingData(contactList, page, limit);
-    console.log('response', response)
+    // let response = getPagingData(contactList, page, limit);
 
-    //ubah format data ke array (DIHAPUS SEMENTARA)
-    
+    //ubah format data ke array
+    var output = contactList.rows.map(function (obj) {
+      return Object.keys(obj)
+        .sort()
+        .map(function (key) {
+          return obj[key];
+        });
+    });
+    response = {
+      recordsTotal: 15,
+      data: [
+        {
+          fullname: "orang_1xxxxx",
+          phone_num: "08121000199",
+          email: "seseorang_1@gmail.com",
+        },
+        {
+          fullname: "orang_2",
+          phone_num: "0810002",
+          email: "seseorang_2@gmail.com",
+        },
+        {
+          fullname: "orang_3",
+          phone_num: "0810003",
+          email: "seseorang_3@gmail.com",
+        },
+        {
+          fullname: "orang_4",
+          phone_num: "0810004",
+          email: "seseorang_4@gmail.com",
+        },
+        {
+          fullname: "orang_5",
+          phone_num: "0810005",
+          email: "seseorang_5@gmail.com",
+        },
+      ],
+      totalPages: 3,
+      draw: 1,
+    };
     res.send(response);
   } catch (err) {
     console.log(err);
@@ -99,10 +138,6 @@ exports.getContactPagination = async (req, res) => {
   }
 };
 
-
-const countNavPage = (draw, totalPage) => {
-  return [draw];
-};
 exports.findAll = async (req, res) => {
   try {
     const { page, size, title } = req.query;
