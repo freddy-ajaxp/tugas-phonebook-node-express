@@ -343,7 +343,8 @@
                         },
                         phone_num: {
                             required: true,
-                            minlength: 8
+                            minlength: 8,
+                            digits: true, 
                         },
                         email: {
                             required: true,
@@ -357,7 +358,8 @@
                         },
                         phone_num: {
                             required: "Nomor telpon harus diisi",
-                            minlength: "minimal 8 karakter"
+                            minlength: "minimal 8 karakter",
+                            digits: "masukkan hanya angka",
                         },
                         email: {
                             required: "email harus diisi",
